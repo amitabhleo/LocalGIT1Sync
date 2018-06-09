@@ -4,7 +4,6 @@ updating an account before insert description
 */
 trigger accountTrigger on Account (before insert) {
 	for (Account a:Trigger.new){
-	//add update description here
-	a.accountNumber = 4866;
+	a.Description ='new Apex update';
 	}
 }
