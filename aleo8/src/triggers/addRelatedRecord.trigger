@@ -3,7 +3,7 @@
 adding an opportunity record after checking if no Opportunty record exits
 Checking if an existing opportunity exits will check the recursion
 */
-trigger addRelatedRecord on Account (before insert, before update) {
+trigger addRelatedRecord on Account (after insert, after update) {
     List <Opportunity> oppList = new List <Opportunity>();
     //Step1 checking getting all the opportunity records for the account
     //getting the related opportunity of the account in a map Signature used below
