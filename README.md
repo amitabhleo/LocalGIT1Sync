@@ -1,5 +1,6 @@
 # hello-world
-**first point**
+**first point in Bold**
+*Second poing in italics*
 
 Just another repository this is the release 1
 
