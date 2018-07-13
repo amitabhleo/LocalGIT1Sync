@@ -17,18 +17,30 @@ trigger ShareTerr on Account (after insert, before update) {
       if (newZip != oldZip) {
         zips.add(newZip);
         changedAccs.add(a.Id);
+<<<<<<< HEAD
       }
     }
 
+=======
+      }      
+    }
+    
+>>>>>>> 51935292a62aa55d0a91fd2c3cfb00d392832ee7
     // Step 1a: Delete sharing records from old Territories
     List<AccountShare> shares = [SELECT Id FROM AccountShare
                                   WHERE AccountId IN :changedAccs
                                     AND RowCause = 'Manual'];
     delete shares;
   }
+<<<<<<< HEAD
 
   // Step 2: Find the matching Territories and Map them
   Map<String, Territory__c> terrMap =
+=======
+  
+  // Step 2: Find the matching Territories and Map them
+  Map<String, Territory__c> terrMap = 
+>>>>>>> 51935292a62aa55d0a91fd2c3cfb00d392832ee7
     new Map<String, Territory__c>();
   List<Territory__c> terrs = [SELECT Id, Zip_Code__c,
                    (SELECT Id, User__c FROM Territory_Members__r)
@@ -37,7 +49,11 @@ trigger ShareTerr on Account (after insert, before update) {
   for (Territory__c terr : terrs) {
     terrMap.put(terr.Zip_Code__c, terr);
   }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 51935292a62aa55d0a91fd2c3cfb00d392832ee7
   // Step 3: Create AccountShares for all Territory Members
   List<AccountShare> shares = new List<AccountShare>();
   for (Account a : Trigger.new) {
@@ -45,8 +61,11 @@ trigger ShareTerr on Account (after insert, before update) {
     if (terr != null) {
       for (Territory_Member__c tm : terr.Territory_Members__r) {
         // We won't create one if they're already the owner
+<<<<<<< HEAD
         //thanks for discussion with Amit Sharma on 11 july 2018
         //consider using a Map for territory members
+=======
+>>>>>>> 51935292a62aa55d0a91fd2c3cfb00d392832ee7
         if (tm.User__c != a.OwnerId) {
           AccountShare aShare           = new AccountShare();
           aShare.AccountId              = a.Id;
