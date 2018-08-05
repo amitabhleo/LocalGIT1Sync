@@ -1,0 +1,16 @@
+<apex:page Controller="addSurvey">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                Welcome {!$User.FirstName}
+                
+                
+                
+                <apex:outputField value=""/>
+                
+            </apex:pageBlockSection>
+            
+        </apex:pageBlock>
+    </apex:form>
+    
+</apex:page>

@@ -1,0 +1,56 @@
+<apex:page standardController="MPM4_BASE__Milestone1_Project__c" 
+           extensions="MPM4_BASE.Milestone1_Project_Config_Utility"
+		   sidebar="false"
+           applyBodyTag="false"
+           docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+		<head>
+		  <title>Project Configuration</title>
+		  <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+		  <apex:stylesheet value="{!URLFOR($Resource.MPM4_BASE__SLDS070, '/assets/styles/salesforce-lightning-design-system-vf.min.css')}" />
+		</head>
+		<center>
+			<div class="slds slds-container--center slds-container--small" style="width:100%">
+			<!--<div class="slds slds-container--center slds-container--small" style="width:325px;">-->
+				<apex:form >
+					<div>
+						<apex:pageBlock mode="edit">
+						
+							<apex:pageBlockButtons location="bottom" >
+								<apex:commandButton value="Save" action="{!saveProjectConfig}" styleClass="slds-button slds-button--brand">
+								</apex:commandButton>
+								
+								<apex:commandButton value="Cancel" action="{!cancel}" styleClass="slds-button slds-button--brand"/>
+							</apex:pageBlockButtons>
+							
+							<apex:outputpanel >
+								<apex:pageBlockSection columns="1" title="Project Configuration" >
+								
+									<apex:pageBlockSectionItem dataStyleClass="width=100%;">
+										<apex:outputLabel value="Project Owner: "/>
+										<apex:inputField value="{!editableProject.ownerId}"/>									
+									</apex:pageBlockSectionItem>
+									
+									<apex:pageBlockSectionItem dataStyleClass="width=100%;" helpText="Leave blank or a value of 0 if you do not want to delay project. If you would like to move back a project use a negative number, if you would like to move foward a project use a positive number."> 
+										<apex:outputText value="# of days to shift project: " styleClass="align:left;"/>
+										<apex:input value="{!numberOfDaysToShift}" type="number"/>
+									</apex:pageBlockSectionItem>
+									
+									<apex:pageBlockSectionItem dataStyleClass="width=100%;" helpText="When selected the project will be adjusted to exclude weekend work."> 
+										<apex:outputText value="Exclude weekend work: " styleClass="align:left;"/>
+										<apex:inputCheckBox value="{!workDay}"/>
+									</apex:pageBlockSectionItem><br/>
+								
+									<center>
+										<font color="red">Please Note: The project may take a couple of minutes to update after the project configuration is saved.</font>
+									</center>
+								</apex:pageBlockSection>
+							</apex:outputpanel>
+						</apex:pageBlock>
+					</div>
+				</apex:form>
+			</div>
+		</center>
+	</html>
+</apex:page>

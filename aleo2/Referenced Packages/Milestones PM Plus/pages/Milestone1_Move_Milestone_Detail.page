@@ -1,0 +1,74 @@
+<!-- 
+Copyright (c) 2011, salesforce.com, Inc.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, 
+are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice, 
+    this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice, 
+    this list of conditions and the following disclaimer in the documentation 
+    and/or other materials provided with the distribution.
+    * Neither the name of the salesforce.com, Inc. nor the names of its contributors 
+    may be used to endorse or promote products derived from this software 
+    without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<apex:page standardController="MPM4_BASE__Milestone1_Milestone__c" 
+           tabStyle="MPM4_BASE__Milestone1_Milestone__c" 
+           extensions="MPM4_BASE.Milestone1_Move_Milestone_Extension" 
+           sidebar="false" 
+           applyBodyTag="false" 
+           docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+		<head>
+		  <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+		  <apex:stylesheet value="{!URLFOR($Resource.MPM4_BASE__SLDS070, '/assets/styles/salesforce-lightning-design-system-vf.min.css')}" />
+		</head>
+				
+		<style>
+		    .moveError { color: red; font-weight: strong;}
+		</style>
+		
+	    <apex:form >
+	    <center>
+	    <div class="slds slds-container--center slds-container--small" style="width:325px;">
+	        <apex:messages layout="table" styleClass="moveError" />
+	        <apex:pageBlock title="{!$Label.mpm4_base__Milestone1_MoveMilestoneS}">
+	            <apex:pageBlockButtons location="bottom" >
+	                <apex:commandButton value="{!$Label.mpm4_base__Milestone1_MoveMilestoneSave}"
+	                                    action="{!moveMilestones}"
+	                                    rendered="{!anySelected && hasPermissionProjectField}" styleClass="slds-button slds-button--brand"/>
+	                <apex:commandButton value="{!$Label.mpm4_base__Milestone1_MoveMilestoneCancel}"
+	                                    action="{!cancel}" styleClass="slds-button slds-button--brand"/>
+	            </apex:pageBlockButtons>
+	               
+	            <center>
+		       		<apex:pageBlockSection columns="1" rendered="{!anySelected && hasPermissionProjectField}">
+		                <apex:inputField value="{!dummyMS.MPM4_BASE__Project__c}" required="true"/>
+		      		</apex:pageBlockSection>
+		            
+		            <apex:outputLabel value="{!$Label.mpm4_base__Milestone1_MilestoneRecordsToMove}"
+		                              rendered="{!anySelected == false && hasPermissionProjectField}"/>
+		            <apex:outputLabel value="{!errorMessagePermission}" 
+		        					rendered="{!!hasPermissionProjectField}"/>
+	        	</center>
+	        </apex:pageBlock>
+	    </div>
+	    </center>   
+	    </apex:form>
+	    
+	</html>
+</apex:page>

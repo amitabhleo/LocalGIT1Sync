@@ -1,0 +1,67 @@
+<apex:page standardcontroller="MPM4_BASE__Milestone1_Milestone__c" 
+           extensions="MPM4_BASE.Milestone2_Project_Task_RL_Controller"
+		   sidebar="false"
+           applyBodyTag="false"
+           docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+		<head>
+		  <title>Quick Task Update Grid</title>
+		  <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+		  <apex:stylesheet value="{!URLFOR($Resource.MPM4_BASE__SLDS070, '/assets/styles/salesforce-lightning-design-system-vf.min.css')}" />
+		</head>
+	
+		<div class="slds slds-grid--frame" role="main">
+
+			<script>
+				function refreshPage(){
+					window.top.location='/{!Milestone1_Milestone__c.id}';
+				}
+				
+			    function setFocusOnLoad() {}
+
+			</script>
+
+			  <apex:form >
+			      
+				      <apex:pageBlock title="Tasks">
+				            
+				            <apex:pageblockTable value="{!lstTask}" var="task" styleClass="slds-table slds-table--bordered">
+				            
+				                <apex:column styleClass="slds-text-heading--label">
+				                        <a href="{!LEFT($Api.Enterprise_Server_URL_260,(FIND('/services',$Api.Enterprise_Server_URL_260)))}{!Task.id}" target="_blank">View</a>
+				                </apex:column>
+				                
+				                <apex:column styleClass="slds-text-heading--label" >
+				                        <a href="{!LEFT($Api.Enterprise_Server_URL_260,(FIND('/services',$Api.Enterprise_Server_URL_260)))}{!Task.id}/e?retURL={!Task.MPM4_BASE__Project_Milestone__c}" target="_blank">Edit</a>
+				                </apex:column>
+				                
+				                <!--  Delete Link *** Commented out as it did not play nicely with SLDS on redirect
+				                <apex:column styleClass="slds-text-heading--label" >
+				                	<apex:commandLink action="{!deleteTaskNow}" value="Delete">
+				                		<apex:param name="taskToDelete" value="{!task.id}" assignTo="{!deletedTask}"/>
+				                	</apex:commandLink>
+				                </apex:column>  -->
+				                
+				                <apex:repeat value="{! fieldSetMembers }" var="varFieldName"> 
+				                    <apex:column styleClass="slds-text-heading--label">
+				                        <apex:facet name="header">{! varFieldName.label}</apex:facet>
+				                        <apex:inputField value="{! task[varFieldName]}"/>
+				                    </apex:column>
+				                </apex:repeat>
+				            </apex:pageblockTable>
+				     
+				            <apex:pageBlockButtons location="top">
+
+				                <apex:commandButton action="{!saveTasks}" value="Save Tasks" oncomplete="refreshPage(); return false;" styleClass="slds-button slds-button--brand"></apex:commandButton>    
+
+								<apex:commandButton onclick="window.open('{!LEFT($Api.Enterprise_Server_URL_260,(FIND('/services',$Api.Enterprise_Server_URL_260)))}{!taskKeyPrefix}/e?retURL=%2F{!MPM4_BASE__Milestone1_Milestone__c.Id}', '_top');" value="New Task" styleClass="slds-button slds-button--brand"/>                
+							</apex:pageBlockButtons>
+				      Note: Use this grid to mass update your tasks. Date updates in this quick task update grid will override predecessor date logic defined.    
+				      </apex:pageBlock>
+		      	  
+			  </apex:form>
+			  
+		  </div>
+	  </html>
+</apex:page>

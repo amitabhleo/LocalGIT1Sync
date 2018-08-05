@@ -1,0 +1,25 @@
+<apex:page controller="SurveyQuestions">
+    <apex:pageBlock title="Survey Questions">
+        <apex:form >
+        <apex:pageBlockSection >
+            <apex:commandButton action="{!save1}" value="Save"/>
+             
+                Welcome to custom controller {!$User.FirstName} !!
+                <apex:outputField value="{!cs.CaseNumber}"/>
+                <apex:outputField value="{!cs.type}"/>
+                <apex:outputField value="{!cs.status}"/>
+                <apex:inputfield value="{!cs.subject}"/>
+                <apex:outputField value="{!sur[0].Name}"/> 
+            
+            <apex:pageBlockTable value="{!sur}" var="Id">
+                <apex:column value="{!Id.Name}"/>
+                <apex:column value="{!Id.Question_Name__c}"/>
+                <apex:column value="{!Id.Response__c}"/>
+            </apex:pageBlockTable>
+        
+        </apex:pageBlockSection>
+        </apex:form>
+    </apex:pageBlock>
+    
+    
+</apex:page>

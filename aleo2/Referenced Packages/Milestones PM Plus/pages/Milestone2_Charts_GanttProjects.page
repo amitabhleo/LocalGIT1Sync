@@ -1,0 +1,51 @@
+<apex:page standardController="MPM4_BASE__Milestone1_Program__c" extensions="MPM4_BASE.Milestone1_Charts_Gantt_Helper" sidebar="false">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		
+		<script>
+	        function printPdf() {
+	            $('.actions').hide();
+	            $('.projPlanner').hide();
+	            window.print()
+	        }
+	        function toggleDisplay(){
+	        	$('.gantt').toggle();
+	        	$('.projPlanner').toggle();
+	        	
+	        	if($('.toggleButton').val() == 'Show Gantt Chart'){
+	        		$('.toggleButton').val('Manage Project Plan');
+	        	}
+	        	else{
+	        		$('.toggleButton').val('Show Gantt Chart');
+	        	}
+	        }	
+    	</script>
+
+		<div class="slds slds-grid--frame" role="main">
+	    <apex:form >
+	        <apex:outputPanel styleClass="actions">
+	            <apex:outputLink value="/{!MPM4_BASE__Milestone1_Program__c.Id}" rendered="{!!allowView}">Back</apex:outputLink>      
+	            &nbsp;
+	            <apex:outputLink id="printBtn" rendered="{!!allowView}" onclick="printPdf();">Print</apex:outputLink>
+	        </apex:outputPanel>
+        	<apex:outputPanel rendered="{!displayGantt}">
+	        	<apex:commandButton styleclass="toggleButton" value="Manage Project Plan" onclick="toggleDisplay()" rerender="none" rendered="{!allowView}"/>
+	            <apex:commandButton value="Print Gantt Chart" onclick="window.open('/apex/Milestone2_Charts_GanttProjects?id={!myId}&p', '_Parent');" rendered="{!allowView}"/>
+	            
+	            <div class="gantt">
+	            <c:Milestone2_Charts_GanttComponent target="{! myId }" size="week"/>
+	            </div>
+	            
+	            <apex:outputPanel rendered="{!allowView}">
+		            <div class="projPlanner" style="display: none;">
+		            <c:Milestone2_Project_Planner target="{! myId }"/> 
+		            </div>
+	            </apex:outputPanel>
+	            
+	    	</apex:outputPanel>
+		    <apex:outputPanel rendered="{!!displayGantt}">
+		        <c:Milestone2_Premium_Gantt_Warning />
+	       	</apex:outputPanel> 
+	    </apex:form>
+    	</div>
+ 	</html>
+</apex:page>

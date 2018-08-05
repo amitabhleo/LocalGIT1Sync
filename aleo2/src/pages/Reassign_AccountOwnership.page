@@ -1,0 +1,7 @@
+<apex:page >
+  <!-- Begin Default Content REMOVE THIS -->
+  <h1>Congratulations</h1>
+  <Flow:interview name="Reassign_Hot_Accounts"/>
+  This is your new Page
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>
