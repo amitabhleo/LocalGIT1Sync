@@ -1,0 +1,17 @@
+<aura:component >
+    <c:helloHeading />
+    <p>Hello Lightning !</p>
+     <aura:attribute name="customMessage" type="String"
+                     default="calling message data type"/>
+    <h3>Hi the custom message is being called</h3>
+    	
+    <p>Hello There! "{!v.customMessage}" </p>
+</aura:component>
+<!--
+    implements="force:appHostable,
+    flexipage:availableForAllPageTypes,
+    flexipage:availableForRecordHome,
+    force:hasRecordId,
+    forceCommunity:availableForAllPageTypes,
+    force:lightningQuickAction" access="global" 
+-->
